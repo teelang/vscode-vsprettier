@@ -1,0 +1,234 @@
+{
+  "name": "vsprettier",
+  "enableProposedApi": true,
+  "version": "1.0.0",
+  "description": "Better and More Flexible Prettier for VSCode",
+  "main": "./out/extension",
+  "author": "Trickymast3r <tricky@t4v.net>",
+  "license": "MIT",
+  "categories": [
+    "Formatters"
+  ],
+  "engines": {
+    "vscode": "^1.30.0"
+  },
+  "keywords": [
+    "formatter",
+    "prettier",
+    "prettier-tslint",
+    "prettier-php",
+    "prettier-eslint",
+    "prettier-stylelint"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "yarn run compile && node ./node_modules/vscode/bin/test"
+  },
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "vsPrettier",
+      "properties": {
+        "vsprettier.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable vsPrettier"
+        },
+        "vsprettier.packageManager": {
+          "type": "string",
+          "enum": [
+            "npm",
+            "yarn"
+          ],
+          "default": "yarn",
+          "description": "The package manager you using to install node modules."
+        },
+        "vsprettier.nodePath": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "A path added to NODE_PATH when resolving the prettier module."
+        },
+        "vsprettier.useEsLint": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use 'prettier-eslint' instead of 'prettier'  if language is React, Javacsript, Typescript, Vue."
+        },
+        "vsprettier.useTsLint": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use 'prettier-tslint' instead of 'prettier' if language is Typescript."
+        },
+        "vsprettier.useStyleLint": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use 'prettier-stylelint' instead of 'prettier' if language is postcss, css, less, scss."
+        },
+        "vsprettier.requireConfig": {
+          "type": "boolean",
+          "default": false,
+          "description": "Require a 'prettier' config file to enable format"
+        },
+        "vsprettier.printWidth": {
+          "type": "integer",
+          "default": 128,
+          "description": "Specify the line length that the printer will wrap on"
+        },
+        "vsprettier.tabWidth": {
+          "type": "integer",
+          "default": 2,
+          "description": "Specify the number of spaces per indentation-level"
+        },
+        "vsprettier.useTabs": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indent lines with tabs instead of spaces."
+        },
+        "vsprettier.semi": {
+          "type": "boolean",
+          "default": true,
+          "description": "Print semicolons at the ends of statements"
+        },
+        "vsprettier.singleQuote": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use single quotes instead of double quotes"
+        },
+        "vsprettier.jsxSingleQuote": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use single quotes instead of double quotes in JSX"
+        },
+        "vsprettier.trailingComma": {
+          "type": "string",
+          "enum": [
+            "none",
+            "es5",
+            "all"
+          ],
+          "default": "none",
+          "description": "Print trailing commas wherever possible when multi-line.\n    'none' - No trailing commas\n   'es5' - Trailing commas where valid in ES5 (objects, arrays, etc)\n    'all' - Trailing commas wherever possible (including function arguments)"
+        },
+        "vsprettier.bracketSpacing": {
+          "type": "boolean",
+          "default": true,
+          "description": "Print spaces between brackets in object literals"
+        },
+        "vsprettier.jsxBracketSameLine": {
+          "type": "boolean",
+          "default": false,
+          "description": "Put the > of a multi-line JSX element at the end of the last line instead of being alone on the next line"
+        },
+        "vsprettier.arrowParens": {
+          "type": "string",
+          "enum": [
+            "avoid",
+            "always"
+          ],
+          "default": "avoid",
+          "description": "Include parentheses around a sole arrow function parameter.\n   'avoid' - Omit parens when possible. Example: x => x\n    'always' - Always include parens. Example: (x) => x"
+        },
+        "vsprettier.requirePragma": {
+          "type": "boolean",
+          "default": false,
+          "description": "Prettier can restrict itself to only format files that contain a special comment, called a pragma, at the top of the file"
+        },
+        "vsprettier.insertPragma": {
+          "type": "boolean",
+          "default": false,
+          "description": "Prettier can insert a special @format marker at the top of files specifying that the file has been formatted with prettier."
+        },
+        "vsprettier.proseWrap": {
+          "type": "string",
+          "enum": [
+            "preserve",
+            "always",
+            "never"
+          ],
+          "default": "preserve",
+          "description": "In some cases you may want to rely on editor/viewer soft wrapping instead, so this option allows you to opt out with 'never'.\n   'always' - Wrap prose if it exceeds the print width.\n    'never' - Do not wrap prose.\n    'preserve' - Wrap prose as-is."
+        },
+        "vsprettier.htmlWhitespaceSensitivity": {
+          "type": "string",
+          "enum": [
+            "css",
+            "strict",
+            "ignore"
+          ],
+          "default": "css",
+          "description": "Specify the global whitespace sensitivity for HTML files, see whitespace-sensitive formatting for more info.\n    'css' - Respect the default value of CSS display property.\n    'strict' - Whitespaces are considered sensitive. \n   'ignore' - Whitespaces are considered insensitive."
+        },
+        "vsprettier.endOfLine": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "lf",
+            "crlf",
+            "cr"
+          ],
+          "default": "auto",
+          "description": "Specify the end of line style"
+        }
+      }
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": ".prettierrc",
+        "url": "http://json.schemastore.org/prettierrc"
+      },
+      {
+        "fileMatch": ".prettierrc.json",
+        "url": "http://json.schemastore.org/prettierrc"
+      },
+      {
+        "fileMatch": "package.json",
+        "url": "http://json.schemastore.org/package"
+      }
+    ],
+    "languages": [
+      {
+        "id": "json",
+        "filenames": [
+          ".prettierrc"
+        ]
+      },
+      {
+        "id": "ignore",
+        "filenames": [
+          ".prettierignore"
+        ]
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.18",
+    "@types/resolve": "^0.0.8",
+    "mocha": "^5.2.0",
+    "tslint": "^5.12.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.2",
+    "vscode": "^1.1.26"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.119",
+    "prettier": "^1.15.3",
+    "prettier-eslint": "^8.8.2",
+    "prettier-stylelint": "^0.4.2",
+    "prettier-tslint": "^0.4.2",
+    "read-pkg-up": "^4.0.0",
+    "resolve": "^1.9.0",
+    "vscode-languageclient": "^5.2.1",
+    "vscode-languageserver": "^5.2.1",
+    "vscode-nls": "^4.0.0"
+  }
+}

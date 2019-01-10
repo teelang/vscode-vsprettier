@@ -1,0 +1,6 @@
+out
+node_modules
+*.log
+*.lock
+test
+.DS_STORE
