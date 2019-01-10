@@ -4,3 +4,4 @@ node_modules
 *.lock
 test
 .DS_STORE
+*.vsix
